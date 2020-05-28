@@ -1,0 +1,30 @@
+{% if course.pk is 1 %}
+<img src=-"https://image.shutterstock.com/image-vector/two-intertwined-snakes-icon-isolated-600w-1571428597.jpg">
+<h1><a href="https://practicum.yandex.com/data-analyst/">{{course}}</a> </h1>
+<h2>{{course.insname}}</h2>
+<ul>
+    {% for x in all.set.all %}
+    <li>
+        {{ x.ct }}</li>
+    {% endfor %}
+</ul>
+{% elif course.pk is 2 %}
+<h1><a href="https://practicum.yandex.com/data-scientist/">{{course}}</a> </h1>
+{% else %}
+<h1>{{course.coursename}}</h1>
+<h2>{{course.insname}}</h2>
+{% endif %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{ % url 'Tech:yourchoice' course.id %}"
+      method="post">
+    {% csrf_token %}
+    {% for choice in course.details_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{ choice.id }">
+    <label for="choice{{ forloop.counter }}">{{ choice.ct }}</label><br>
+    {% endfor %}
+
+</form>
+
